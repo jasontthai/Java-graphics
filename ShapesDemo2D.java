@@ -92,6 +92,103 @@ public class ShapesDemo2D extends JApplet{
     g2.drawString("RoundRectangle2D", x, stringY);
     x += gridWidth;
     
+        // draw Arc2D.Double       
+        g2.setStroke(wideStroke);
+        g2.draw(new Arc2D.Double(x, y, rectWidth, rectHeight, 90, 
+                                 135, Arc2D.OPEN));
+        g2.drawString("Arc2D", x, stringY);
+        x += gridWidth;
+
+        // draw Ellipse2D.Double
+        g2.setStroke(stroke);
+        g2.draw(new Ellipse2D.Double(x, y, rectWidth, rectHeight));
+        g2.drawString("Ellipse2D", x, stringY);
+        x += gridWidth;
+
+        // draw GeneralPath (polygon)
+        int x1Points[] = {x, x+rectWidth, x, x+rectWidth};
+        int y1Points[] = {y, y+rectHeight, y+rectHeight, y};
+        GeneralPath polygon = new GeneralPath(GeneralPath.WIND_EVEN_ODD,
+                                              x1Points.length);
+        polygon.moveTo(x1Points[0], y1Points[0]);
+        for ( int index = 1; index < x1Points.length; index++ ) {
+            polygon.lineTo(x1Points[index], y1Points[index]);
+        };
+        polygon.closePath();
+
+        g2.draw(polygon);
+        g2.drawString("GeneralPath", x, stringY);
+
+        // NEW ROW
+        x = 5;
+        y += gridHeight;
+        stringY += gridHeight;
+
+        // draw GeneralPath (polyline)
+
+        int x2Points[] = {x, x+rectWidth, x, x+rectWidth};
+        int y2Points[] = {y, y+rectHeight, y+rectHeight, y};
+        GeneralPath polyline = new GeneralPath(GeneralPath.WIND_EVEN_ODD,
+                                               x2Points.length);
+        polyline.moveTo (x2Points[0], y2Points[0]);
+        for ( int index = 1; index < x2Points.length; index++ ) {
+            polyline.lineTo(x2Points[index], y2Points[index]);
+        };
+
+        g2.draw(polyline);
+        g2.drawString("GeneralPath (open)", x, stringY);
+        x += gridWidth;
+
+        // fill Rectangle2D.Double (red)
+        g2.setPaint(red);
+        g2.fill(new Rectangle2D.Double(x, y, rectWidth, rectHeight));
+        g2.setPaint(fg);
+        g2.drawString("Filled Rectangle2D", x, stringY);
+        x += gridWidth;        
+
+        // fill RoundRectangle2D.Double
+        GradientPaint redtowhite = new GradientPaint(x,y,red,x+rectWidth, y,white);
+        g2.setPaint(redtowhite);
+        g2.fill(new RoundRectangle2D.Double(x, y, rectWidth, 
+                                            rectHeight, 10, 10));
+        g2.setPaint(fg);
+        g2.drawString("Filled RoundRectangle2D", x, stringY);
+        x += gridWidth;
+
+        // fill Arc2D 
+        g2.setPaint(red);
+        g2.fill(new Arc2D.Double(x, y, rectWidth, rectHeight, 90, 
+                                 135, Arc2D.OPEN));
+        g2.setPaint(fg);
+        g2.drawString("Filled Arc2D", x, stringY);
+        x += gridWidth;
+
+        // fill Ellipse2D.Double
+        redtowhite = new GradientPaint(x,y,red,x+rectWidth, y,white);
+        g2.setPaint(redtowhite);
+        g2.fill (new Ellipse2D.Double(x, y, rectWidth, rectHeight));
+        g2.setPaint(fg);
+        g2.drawString("Filled Ellipse2D", x, stringY);
+        x += gridWidth;
+
+
+
+        // fill and stroke GeneralPath
+        int x3Points[] = {x, x+rectWidth, x, x+rectWidth};
+        int y3Points[] = {y, y+rectHeight, y+rectHeight, y};
+        GeneralPath filledPolygon = new GeneralPath(GeneralPath.WIND_EVEN_ODD,
+                                                    x3Points.length);
+        filledPolygon.moveTo(x3Points[0], y3Points[0]);
+        for ( int index = 1; index < x3Points.length; index++ ) {
+            filledPolygon.lineTo(x3Points[index], y3Points[index]);
+        };
+        filledPolygon.closePath();
+        g2.setPaint(red);
+        g2.fill(filledPolygon);
+        g2.setPaint(fg);
+        g2.draw(filledPolygon);
+        g2.drawString("Filled and Stroked GeneralPath", x, stringY);
+        
     
   }
   
