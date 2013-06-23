@@ -58,6 +58,41 @@ public class ShapesDemo2D extends JApplet{
     Dimension d= getSize();
     int gridWidth = d.width/6;
     int gridHeight = d.height/2;
+
+    fontMetrics = pickFont(g2, "Filled and Stroked GeneralPath", gridWidth);
+
+    Color fg3D = Color.lightGray;
+
+    g2.setPaint(fg3D);
+    g2.draw3DRect(0, 0, d.width - 1, d.height - 1, true);
+    g2.draw3DRect(3, 3, d.width - 7, d.height - 7, false);
+    g2.setPaint(fg);
+
+    int x = 5;
+    int y = 7;
+    int rectWidth = gridWidth - 2*x;
+    int stringY = gridHeight - 3 - fontMetrics.getDescent();
+    int rectHeight = stringY - fontMetrics.getMaxAscent() - y - 2;
+
+    // draw Line2D.Double
+    g2.draw(new Line2D.Double(x, y+rectHeight-1, x+rectWidth,y));
+    g2.drawString("Line2D", x, stringY);
+    x += gridWidth;
+
+    // draw Rectangle2D.Double
+    g2.setStroke(stroke);
+    g2.draw(new Rectangle2D.Double(x, y, rectWidth, rectHeight));
+    g2.drawString("Rectangle2D", x, stringY);
+    x += gridWidth;
+
+    // draw  RoundRectangle2D.Double
+    g2.setStroke(dashed);
+    g2.draw(new RoundRectangle2D.Double(x, y, rectWidth, 
+                                            rectHeight, 10, 10));
+    g2.drawString("RoundRectangle2D", x, stringY);
+    x += gridWidth;
+    
+    
   }
   
   public static void main(String[] s) {
